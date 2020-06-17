@@ -1,0 +1,15 @@
+D:\NetCore\Appserverside3.0\Appserverside3.0\bin\Debug\netcoreapp3.1\appsettings.Development.json
+D:\NetCore\Appserverside3.0\Appserverside3.0\bin\Debug\netcoreapp3.1\appsettings.json
+D:\NetCore\Appserverside3.0\Appserverside3.0\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
+D:\NetCore\Appserverside3.0\Appserverside3.0\bin\Debug\netcoreapp3.1\Appserverside3.0.exe
+D:\NetCore\Appserverside3.0\Appserverside3.0\obj\Debug\netcoreapp3.1\Appserverside3.0.csprojAssemblyReference.cache
+D:\NetCore\Appserverside3.0\Appserverside3.0\obj\Debug\netcoreapp3.1\Appserverside3.0.AssemblyInfoInputs.cache
+D:\NetCore\Appserverside3.0\Appserverside3.0\obj\Debug\netcoreapp3.1\Appserverside3.0.AssemblyInfo.cs
+D:\NetCore\Appserverside3.0\Appserverside3.0\obj\Debug\netcoreapp3.1\Appserverside3.0.RazorTargetAssemblyInfo.cache
+D:\NetCore\Appserverside3.0\Appserverside3.0\obj\Debug\netcoreapp3.1\staticwebassets\Appserverside3.0.StaticWebAssets.Manifest.cache
+D:\NetCore\Appserverside3.0\Appserverside3.0\obj\Debug\netcoreapp3.1\staticwebassets\Appserverside3.0.StaticWebAssets.xml
+D:\NetCore\Appserverside3.0\Appserverside3.0\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
+D:\NetCore\Appserverside3.0\Appserverside3.0\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\NetCore\Appserverside3.0\Appserverside3.0\obj\Debug\netcoreapp3.1\Appserverside3.0.csproj.CopyComplete
+D:\NetCore\Appserverside3.0\Appserverside3.0\obj\Debug\netcoreapp3.1\Appserverside3.0.csproj.CoreCompileInputs.cache
+D:\NetCore\Appserverside3.0\Appserverside3.0\obj\Debug\netcoreapp3.1\Appserverside3.0.MvcApplicationPartsAssemblyInfo.cache
