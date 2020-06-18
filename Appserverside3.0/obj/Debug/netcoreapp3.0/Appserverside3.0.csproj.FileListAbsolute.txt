@@ -42,3 +42,8 @@ D:\NetCore\Appserverside3.0\Appserverside3.0\obj\Debug\netcoreapp3.0\Appserversi
 D:\NetCore\Appserverside3.0\Appserverside3.0\obj\Debug\netcoreapp3.0\Appserverside3.0.genruntimeconfig.cache
 D:\NetCore\Appserverside3.0\Appserverside3.0\obj\Debug\netcoreapp3.0\Appserverside3.0.csproj.CoreCompileInputs.cache
 D:\NetCore\Appserverside3.0\Appserverside3.0\obj\Debug\netcoreapp3.0\Appserverside3.0.MvcApplicationPartsAssemblyInfo.cache
+D:\NetCore\Appserverside3.0\Appserverside3.0\bin\Debug\netcoreapp3.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\NetCore\Appserverside3.0\Appserverside3.0\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\NetCore\Appserverside3.0\Appserverside3.0\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.Logging.dll
+D:\NetCore\Appserverside3.0\Appserverside3.0\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.Tokens.dll
+D:\NetCore\Appserverside3.0\Appserverside3.0\bin\Debug\netcoreapp3.0\System.IdentityModel.Tokens.Jwt.dll

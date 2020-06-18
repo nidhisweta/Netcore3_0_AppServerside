@@ -47,6 +47,14 @@ namespace AppServerSide.Repository
             CreatePasswordHash(password,out passwordHash,out passwordSalt);
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
+            if (user.Username == "admin")
+            {
+                user.Role = "Admin";
+            }
+            else
+            {
+                user.Role = "User";
+            }
             await _context.AddAsync(user);
             await _context.SaveChangesAsync();
             return user;
