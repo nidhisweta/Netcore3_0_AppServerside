@@ -6,8 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using AppServerSide.Data;
 using Microsoft.EntityFrameworkCore;
 using AppServerSide.Models;
+using Microsoft.AspNetCore.Authorization;
+
 namespace AppServerSide.Controllers
-{
+{   
+    [Authorize(Roles = "Admin,User")]
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
@@ -18,6 +21,8 @@ namespace AppServerSide.Controllers
             _context = context;
         }
         // GET api/values
+
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -26,6 +31,7 @@ namespace AppServerSide.Controllers
             }
 
         // GET api/values/5
+        [Authorize(Roles = "User")]
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {

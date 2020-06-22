@@ -13,6 +13,10 @@ using Microsoft.Extensions.Logging;
 using AppServerSide.Data;
 using AppServerSide.Repository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Appserverside3._0
 {
@@ -32,6 +36,19 @@ namespace Appserverside3._0
             services.AddDbContext<DataContext>(options => options.UseSqlite(Configuration.GetConnectionString("Default")));
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddCors();
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuerSigningKey=true,
+                    IssuerSigningKey= new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.GetSection("Appsettings").GetSection("Token").Value)),
+
+                    ValidateAudience=false,
+                    ValidateIssuer=false,
+
+            };
+                
+            });
 
         }
 
@@ -44,9 +61,12 @@ namespace Appserverside3._0
             }
 
             //app.UseHttpsRedirection();
+            
+            app.UseRouting();
+
             app.UseCors(x => x.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod());
 
-            app.UseRouting();
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
@@ -54,6 +74,7 @@ namespace Appserverside3._0
             {
                 endpoints.MapControllers();
             });
+         
         }
     }
 }

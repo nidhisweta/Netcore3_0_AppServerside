@@ -11,6 +11,8 @@ using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
+using System.Security.Cryptography;
+using Microsoft.Extensions.Configuration;
 
 namespace AppServerSide.Controllers
 {
@@ -19,9 +21,12 @@ namespace AppServerSide.Controllers
     public class AuthController : ControllerBase
     {
         private IAuthRepository _repo;
-        public AuthController(IAuthRepository repo)
+        private IConfiguration _config;
+
+        public AuthController(IAuthRepository repo,IConfiguration config)
         {
             _repo = repo;
+            _config = config;
         }
 
         [HttpPost("register")]
@@ -50,39 +55,49 @@ namespace AppServerSide.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDTO userForLoginDTO)
         {
-            var userfromrepo = await _repo.Login(userForLoginDTO.Username, userForLoginDTO.Password);
+            try
+            {
 
-            if (userfromrepo != null)
+                var userfromrepo = await _repo.Login(userForLoginDTO.Username, userForLoginDTO.Password);
+                if (userfromrepo != null)
                 {
 
-                var claims = new ClaimsIdentity();
-                claims.AddClaim(new Claim(ClaimTypes.Name, userfromrepo.Username));
-                claims.AddClaim(new Claim(ClaimTypes.Role, userfromrepo.Role));
-             
-                var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("hello"));
-                var signature = new SigningCredentials(key,SecurityAlgorithms.HmacSha256Signature);
-                var tokendescription = new SecurityTokenDescriptor()
-                {
-                    Subject = claims,
-                    SigningCredentials=signature,
-                    Expires=DateTime.Now.AddDays(1)
-                };
+                    var claims = new ClaimsIdentity();
+                    claims.AddClaim(new Claim(ClaimTypes.Name, userfromrepo.Username));
+                    claims.AddClaim(new Claim(ClaimTypes.Role, userfromrepo.Role));
+
+                    var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_config.GetSection("Appsettings").GetSection("Token").Value));
+                    var key1 = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("ProEMLh5e_qnzdNU"));
+                    var signature = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+                   
+                    var tokendescription = new SecurityTokenDescriptor()
+                    {
+                        Subject = claims,
+                        SigningCredentials = signature,
+                        Expires = DateTime.Now.AddDays(1),
+                      //  EncryptingCredentials=new EncryptingCredentials(key1, SecurityAlgorithms.Aes128KW,
+                        //SecurityAlgorithms.Aes128CbcHmacSha256)
+                    };
 
 
-                var tokenhandler = new JwtSecurityTokenHandler();
-                 var token = tokenhandler.CreateJwtSecurityToken(tokendescription);
-                return Ok(new
-                {
-                    JWTtoken = tokenhandler.WriteToken(token)
-                });
+                    var tokenhandler = new JwtSecurityTokenHandler();
+                    var token = tokenhandler.CreateJwtSecurityToken(tokendescription);
+                    return Ok(new
+                    {
+                        JWTtoken = tokenhandler.WriteToken(token)
+                    });
 
                 }
-            else
+                else
                 {
                     return Unauthorized();
                 }
-            
 
+            }
+            catch(Exception ex)
+            {
+                return BadRequest("erroor" + ex.Message);
+            }
         }
     }
 }
