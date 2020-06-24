@@ -58,11 +58,12 @@ namespace AppServerSide.Controllers
             try
             {
 
-                var userfromrepo = await _repo.Login(userForLoginDTO.Username, userForLoginDTO.Password);
+                var userfromrepo = await _repo.Login(userForLoginDTO.Username.ToLower(), userForLoginDTO.Password);
                 if (userfromrepo != null)
                 {
 
                     var claims = new ClaimsIdentity();
+                    claims.AddClaim(new Claim(ClaimTypes.NameIdentifier, userfromrepo.Id.ToString()));
                     claims.AddClaim(new Claim(ClaimTypes.Name, userfromrepo.Username));
                     claims.AddClaim(new Claim(ClaimTypes.Role, userfromrepo.Role));
 

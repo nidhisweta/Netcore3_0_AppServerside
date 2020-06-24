@@ -10,7 +10,8 @@ namespace Appserverside3._0.DTO
     {
         [Required]
         public string Username { get; set;}
-       
+
+        [StringLength(8,MinimumLength =4,ErrorMessage ="Password must be between 4 and 8 characters")]
         [Required]
         public string Password { get; set; }
     }
