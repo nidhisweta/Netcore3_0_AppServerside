@@ -17,6 +17,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Net;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http;
 
 namespace Appserverside3._0
 {
@@ -57,7 +60,28 @@ namespace Appserverside3._0
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+               // app.UseDeveloperExceptionPage();
+                app.UseExceptionHandler(app =>
+                {
+                    app.Run(async context =>
+                    {
+                        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                        var error = context.Features.Get<IExceptionHandlerFeature>();
+                        await context.Response.WriteAsync(error.Error.Message);
+                    });
+                });
+            }
+            else
+            {
+                app.UseExceptionHandler(app =>
+                {
+                    app.Run(async context =>
+                    {
+                        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                        var error = context.Features.Get<IExceptionHandlerFeature>();
+                        await context.Response.WriteAsync(error.Error.Message);
+                    });
+                });
             }
 
             //app.UseHttpsRedirection();

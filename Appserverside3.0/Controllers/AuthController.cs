@@ -55,9 +55,6 @@ namespace AppServerSide.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDTO userForLoginDTO)
         {
-            try
-            {
-
                 var userfromrepo = await _repo.Login(userForLoginDTO.Username.ToLower(), userForLoginDTO.Password);
                 if (userfromrepo != null)
                 {
@@ -94,11 +91,6 @@ namespace AppServerSide.Controllers
                     return Unauthorized();
                 }
 
-            }
-            catch(Exception ex)
-            {
-                return BadRequest("erroor" + ex.Message);
-            }
-        }
+         }
     }
 }
